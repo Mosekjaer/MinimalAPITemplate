@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using MinimalAPITemplate.Infrastructure.Identity;
+using MinimalAPITemplate.Entities;
 
-namespace MinimalAPITemplate.Infrastructure.Data
+namespace MinimalAPITemplate.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -10,6 +10,9 @@ namespace MinimalAPITemplate.Infrastructure.Data
             : base(options)
         {
         }
+
+        public DbSet<TodoItem> TodoItems => Set<TodoItem>();
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

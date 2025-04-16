@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace MinimalAPITemplate.Infrastructure.Identity
+namespace MinimalAPITemplate.Entities
 {
     public class ApplicationUser : IdentityUser
     {

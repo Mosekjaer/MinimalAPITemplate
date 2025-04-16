@@ -1,8 +1,8 @@
 ﻿using System.Net.Mime;
 using Microsoft.EntityFrameworkCore;
-using MinimalAPITemplate.Infrastructure.Data;
+using MinimalAPITemplate.Data;
 
-namespace MinimalAPITemplate.Infrastructure.Extensions
+namespace MinimalAPITemplate.Extensions
 {
     public static class MigrationExtensions
     {

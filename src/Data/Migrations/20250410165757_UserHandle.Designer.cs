@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MinimalAPITemplate.Infrastructure.Data;
+using MinimalAPITemplate.Data;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MinimalAPITemplate.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250410170022_NewChange")]
-    partial class NewChange
+    [Migration("20250410165757_UserHandle")]
+    partial class UserHandle
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -180,6 +180,7 @@ namespace MinimalAPITemplate.Infrastructure.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Handle")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("LastName")

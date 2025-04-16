@@ -1,9 +1,11 @@
-
+using System.Reflection;
+using Carter;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using MinimalAPITemplate.Infrastructure.Data;
-using MinimalAPITemplate.Infrastructure.Extensions;
-using MinimalAPITemplate.Infrastructure.Identity;
+using MinimalAPITemplate.Data;
+using MinimalAPITemplate.Entities;
+using MinimalAPITemplate.Extensions;
 using Scalar.AspNetCore;
 
 namespace MinimalAPITemplate
@@ -36,6 +38,10 @@ namespace MinimalAPITemplate
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(Environment.GetEnvironmentVariable("APP_DB_CONNECTION")));
+
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+
+            builder.Services.AddCarter();
 
             var app = builder.Build();
 
@@ -72,26 +78,9 @@ namespace MinimalAPITemplate
             app.UseAuthentication();
             app.UseAuthorization();
 
-            var summaries = new[]
-            {
-                "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-            };
-
-            app.MapGet("/weatherforecast", (HttpContext httpContext) =>
-            {
-                var forecast = Enumerable.Range(1, 5).Select(index =>
-                    new WeatherForecast
-                    {
-                        Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                        TemperatureC = Random.Shared.Next(-20, 55),
-                        Summary = summaries[Random.Shared.Next(summaries.Length)]
-                    })
-                    .ToArray();
-                return forecast;
-            })
-            .WithName("GetWeatherForecast");
-
             app.MapIdentityApi<ApplicationUser>().WithTags("Identity");
+            
+            app.MapCarter();
 
             app.Run();
         }

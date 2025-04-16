@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using MinimalAPITemplate.Infrastructure.Data;
-using MinimalAPITemplate.Infrastructure.Identity;
+using MinimalAPITemplate.Data;
+using MinimalAPITemplate.Entities;
 
-namespace MinimalAPITemplate.Infrastructure.Extensions
+namespace MinimalAPITemplate.Extensions
 {
     public static class SeedExtensions
     {
